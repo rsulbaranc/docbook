@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => { res.json({ message: "Welcome to docbook api" }); });
 
-app.use(recordRoutes);
-app.use(authRoutes);
+app.use("/api", recordRoutes);
+app.use("/api", authRoutes);
 
 //error handler
 app.use((err, req, res, next) => {
