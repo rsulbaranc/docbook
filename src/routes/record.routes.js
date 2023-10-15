@@ -1,4 +1,4 @@
-import { Router } from "express";
+import Router from 'express-promise-router'
 import {
   getRecords,
   createRecord,
@@ -12,7 +12,7 @@ router.get("/records", getRecords);
 
 router.get("/record/:id", getRecord);
 
-router.post("/record/:id", createRecord);
+router.post("/record", createRecord);
 
 router.put("/record/:id", updateRecord);
 
