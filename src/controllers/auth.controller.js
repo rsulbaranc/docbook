@@ -5,18 +5,23 @@ import { createAccessToken } from "../libs/jwt.js";
 
 const { auth } = querys;
 
-export class AuthController {
-  probar() {
-    return "hola";
-  }
-}
 
 //Inicio de sesion / Signin
-export const signin = (req, res) => {
-  /*
-    const manager = new AuthController
-   const path = req.body.method
-      res.send(manager.(path)) */
+export const signin = async (req, res) => {
+
+    let _clase = await import(`./bo/${req.body.object}.js`);
+    let obj = new _clase.default();
+    let p = null;
+    let r = null;
+    if(req.body.params){
+      r = obj[req.body.method](req.body.params);
+    }
+    else{
+      r = obj[req.body.method]();
+    }
+    
+    if(typeof r ==='string') res.send(r);
+    if(typeof r ==='object') res.json(r);
 };
 
 //Registro / Signup
