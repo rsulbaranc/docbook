@@ -6,9 +6,10 @@ import {
   updateRecord,
   deleteRecord,
 } from "../controllers/record.controller.js";
+import {isAuth} from '../middlewares/auth.middleware.js'
 const router = Router();
 
-router.get("/records", getRecords);
+router.get("/records", isAuth, getRecords);
 
 router.get("/record/:id", getRecord);
 

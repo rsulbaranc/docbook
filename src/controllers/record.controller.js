@@ -8,8 +8,9 @@ const { record } = querys;
 
 //Obtener todos los registros / Get all records
 export const getRecords = async (req, res) => {
+  console.log(req.userId)
   const result = await pool.query(record.getRecords);
-  console.log(result);
+  //console.log(result);
   return res.json(result.rows);
 };
 
@@ -54,7 +55,13 @@ export const updateRecord = async (req, res) => {
   const { desc_historia } = req.body;
 
   const result = await pool.query(record.updateRecord, [desc_historia, id]);
-  console.log(result);
+ 
+  if (result.rowCount === 0) {
+    return res.status(404).json({
+      menssage: "Record not found",
+    });
+  }
+
   return res.json(`Record ${id} updated Successfully`);
 };
 
