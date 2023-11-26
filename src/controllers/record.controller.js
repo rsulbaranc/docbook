@@ -9,7 +9,7 @@ const { record } = querys;
 //Obtener todos los registros / Get all records
 export const getRecords = async (req, res) => {
   console.log(req.userId)
-  const result = await pool.query(record.getRecords);
+  const result = await pool.query(record.getRecords, [req.userId]);
   //console.log(result);
   return res.json(result.rows);
 };
@@ -31,7 +31,8 @@ export const getRecord = async (req, res) => {
 
 //Crear un registro / Create a record
 export const createRecord = async (req, res, next) => {
-  const { id_paciente, desc_historia, id_doctor } = req.body;
+  const id_doctor = req.userId 
+  const { id_paciente, desc_historia } = req.body;
 
   try {
     const result = await pool.query(
