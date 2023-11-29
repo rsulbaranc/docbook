@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import {Profile} from './pages/Profile'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import NotFound from './pages/NotFound'
 
 export const App = () => {
   return (
@@ -12,6 +13,7 @@ export const App = () => {
       <Route path="/profile" element={<Profile/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
+      <Route path="*" element={<NotFound/>} />
     </Routes>
   )
 }

@@ -1,13 +1,27 @@
-import pool from "../../database";
+import  pool  from "../../db.js";
+import bcrypt from "bcrypt";
+import querys from "../utils/querys.json" assert { type: "json" };
 
-const Record = class {
+let Record = class {
 
-    constructor(){}
+  
+  db = pool;
+  querys = querys.getRecord; 
 
+    constructor(){
+      //this.db = pool;
+    }
 
+    hola(req, res){
+      console.log("llego aqui")
+      return "hola";
+    }
+  
+
+    /*
     async getRecords  (req, res) {
         console.log(req.userId)
-        const result = await pool.query(record.getRecords);
+        const result = await this.db.query(record.getRecords);
         //console.log(result);
         return res.json(result.rows);
       };
@@ -77,5 +91,7 @@ const Record = class {
         }
         return res.sendStatus(204);
       };
-      
+      */
 }
+
+export default Record;

@@ -12,15 +12,15 @@ const router = Router();
 
 router.get("/records", isAuth, getRecords);
 
-router.get("/record/:id", getRecord);
+router.get("/record/:id", isAuth, getRecord);
 
 router.post("/record", isAuth, createRecord);
 
-router.put("/record/:id", updateRecord);
+router.put("/record/:id", isAuth, updateRecord);
 
-router.delete("/record/:id", deleteRecord);
+router.delete("/record/:id", isAuth, deleteRecord);
 
 
-router.post("/process", isAuth, process)
+router.post("/process", process)
 
 export default router;

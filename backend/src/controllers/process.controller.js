@@ -1,5 +1,6 @@
 export const process = async (req, res) => {
-    let _clase = await import(`./bo/${req.body.object}.js`);
+  console.log(req.body)
+    let _clase = await import(`./bo/${req.body.clase}.js`);
       let obj = new _clase.default();
       let p = null;
       let r = null;
