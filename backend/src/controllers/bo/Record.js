@@ -1,15 +1,19 @@
-import  pool  from "../../db.js";
+import  {pool}  from "../../db.js";
 import bcrypt from "bcrypt";
-import querys from "../utils/querys.json" assert { type: "json" };
+import querys from "../../utils/querys.json" assert { type: "json" };
+
+//console.log(pool)
 
 let Record = class {
+ 
 
   
-  db = pool;
-  querys = querys.getRecord; 
+  //querys = querys.getRecord; 
 
     constructor(){
-      //this.db = pool;
+      this.db = pool;
+      this.bycrypt = bcrypt;
+      this.querys = querys.record;
     }
 
     hola(req, res){
@@ -18,12 +22,12 @@ let Record = class {
     }
   
 
-    /*
+    
     async getRecords  (req, res) {
         console.log(req.userId)
         const result = await this.db.query(record.getRecords);
         //console.log(result);
-        return res.json(result.rows);
+        return result.rows;
       };
       
       //Obtener un registro / Get a record
@@ -42,22 +46,22 @@ let Record = class {
       };
       
       //Crear un registro / Create a record
-      async createRecord  (req, res, next) {
-        const { id_paciente, desc_historia, id_doctor } = req.body;
+      async createRecord  (params) {
+        const { id_paciente, desc_historia, id_doctor } = params;
       
         try {
           const result = await pool.query(
-            record.createRecord,
+            this.querys.createRecord,
             [id_paciente, desc_historia, id_doctor]
           );
-          res.json(result.rows[0]);
+          return result.rows[0];
         } catch (error) {
           if (error.code === "23505") {
-            res.status(409).json({
+            return {
               menssage: "This record already exist",
-            });
+            }
           }
-          next(error);
+         return error;
         }
       };
       
@@ -91,7 +95,7 @@ let Record = class {
         }
         return res.sendStatus(204);
       };
-      */
+      
 }
 
 export default Record;
