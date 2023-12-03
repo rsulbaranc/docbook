@@ -6,10 +6,14 @@ import {
   profile,
 } from "../controllers/auth.controller.js";
 import {isAuth} from '../middlewares/auth.middleware.js'
+import {validateSchema} from '../middlewares/validate.middleware.js'
+import {userLogin} from '../schemas/auth.schema.js'
+
+
 
 const router = Router();
 
-router.post("/signin", signin);
+router.post("/signin", validateSchema(userLogin), signin);
 
 router.post("/signup", signup);
 

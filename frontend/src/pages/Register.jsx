@@ -1,34 +1,32 @@
 import { Button, Card, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
 
+  const { signup, errors } = useAuth();
+  const navigate = useNavigate();
+
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    /*
-    const response = await fetch("http://localhost:3000/api/signup", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json",
-        'Access-Control-Allow-Credentials': true
-      }
-    });
-    const result = await response.json();
-    console.log(result); */
-    const res = await axios.post("http://localhost:3000/api/signup", data, {
-      withCredentials: true,
-    });
-    console.log(res);
+    const user = await signup(data); 
+    if (user) navigate('/profile');
+
   });
 
   return (
     <div className="h-[calc(100vh-64px)] flex items-center justify-center">
       <Card>
+
+      {
+          errors && (
+            errors.map((err, index) => (
+              <p key={index} className="text-red-500 text-center">{err}</p>
+            ))
+          )
+        }
+
         <h1 className="text-4xl font-bold my-2 text-center">Register</h1>
 
         <form onSubmit={onSubmit}>
