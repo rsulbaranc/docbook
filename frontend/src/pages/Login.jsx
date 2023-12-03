@@ -25,7 +25,7 @@ const Login = () => {
   });
 
   return (
-    <div className="h-[calc(100vh-64px)] flex justify-center items-center">
+    <div className="h-[calc(100vh-10rem)] flex justify-center items-center">
       <Card>
 
         {

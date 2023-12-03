@@ -55,7 +55,8 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (Cookie.get('token')){
-      axios.get("/profile")
+      axios
+      .get("/profile")
       .then((res) => {
         setUser(res.data);
         setIsAuth(true);
@@ -66,7 +67,7 @@ export function AuthProvider({ children }) {
         console.log(err);
       })
     }
-  });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, isAuth, errors, signup, signin}}>
