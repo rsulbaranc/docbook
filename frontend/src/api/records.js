@@ -14,3 +14,5 @@ const jsonDataWithOutParams = (method) => ({
 export const createRecordRequest = (data) => axios.post("/process", jsonData(data, 'createRecord'));
 
 export const getRecordsRequest = () => axios.post("/process", jsonDataWithOutParams('getRecords'));
+
+export const deleteRecordRequest = (id) => axios.post(`/process`, jsonData(id, 'deleteRecord'));

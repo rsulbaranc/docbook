@@ -78,18 +78,32 @@ let Record = class {
       };
       
       //Eliminar un registro / Delete a record
-      async deleteRecord (req, res) {
+      async deleteRecord (params) {
+
+        const [data] = params;
+
+        if (typeof data.id != 'number') {
+          return {
+            menssage: "The id is not a number",
+            code: 404,
+          }
+        }
+
         const result = await pool.query(
-          record.deleteRecord,
-          [req.params.id]
+          this.querys.deleteRecord,
+          [data.id]
         );
         console.log(result);
         if (result.rowCount === 0) {
-          return res.status(404).json({
+          return {
             menssage: "Record not found",
-          });
+            code: 404,
+          }
         }
-        return res.sendStatus(204);
+        return { 
+          code: 200, 
+          menssage: `Record ${data.id} deleted Successfully`
+        }
       };
       
 }

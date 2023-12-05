@@ -9,8 +9,10 @@ import { Profile } from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import DashboardDoctor from "./pages/DashboardDoctor";
 import { useAuth } from "./context/AuthContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProtectedRoute} from "./components/guards/ProtectedRoute";
+import { DoctorGuard } from "./components/guards/DoctorGuard";
 import RecordForm from "./pages/RecordForm";
 
 export const App = () => {
@@ -31,10 +33,17 @@ export const App = () => {
           <Route element={<ProtectedRoute isAllowed={isAuth} redirecTo={"/login"}/>}>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+          </Route>
+
+
+          <Route element={<DoctorGuard isAllowed={isAuth} redirecTo={"/"} license={"patient"}/>}>
+            <Route path="/dashboard" element={<DashboardDoctor/>}/>
             <Route path="/createRecord" element={<RecordForm />} />
           </Route>
 
+
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </Container>
     </>
