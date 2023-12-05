@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { navigation } from "./navigation";
+import { publicRoutes, privateRoutes } from "./navigation";
 import { Container } from "../ui";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const location = useLocation();
+  const { isAuth, signout } = useAuth();
   //console.log(location)
 
   return (
@@ -14,18 +16,43 @@ const Navbar = () => {
         </Link>
 
         <ul className="flex gap-x-2">
-          {navigation.map((item) => (
-            <li
-              className={` ${
-                location.pathname === item.href && "bg-sky-500 px-3 py-1 "
-              } `}
-              key={item.name}
-            >
-              <Link to={item.href} className="text-white	">
-                {item.name}
-              </Link>
-            </li>
-          ))}
+          {isAuth ? (
+            <>
+              {privateRoutes.map((item) => (
+                <li
+                  className={` ${
+                    location.pathname === item.href && "bg-sky-500 px-3 py-1 "
+                  } `}
+                  key={item.name}
+                >
+                  <Link to={item.href} className="text-white	">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+              <li
+                onClick={() => {
+                  signout();
+                }}
+                className="text-white cursor-pointer"
+              >
+                Signout
+              </li>
+            </>
+          ) : (
+            publicRoutes.map((item) => (
+              <li
+                className={` ${
+                  location.pathname === item.href && "bg-sky-500 px-3 py-1 "
+                } `}
+                key={item.name}
+              >
+                <Link to={item.href} className="text-white	">
+                  {item.name}
+                </Link>
+              </li>
+            ))
+          )}
         </ul>
       </Container>
     </nav>

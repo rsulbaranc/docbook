@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { DEV_API } from './index.js';
 
 const client = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: DEV_API,
     withCredentials: true
     
 });

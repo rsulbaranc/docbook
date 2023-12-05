@@ -2,38 +2,26 @@ import  {pool}  from "../../db.js";
 import bcrypt from "bcrypt";
 import querys from "../../utils/querys.json" assert { type: "json" };
 
-//console.log(pool)
 
 let Record = class {
  
-
-  
-  //querys = querys.getRecord; 
-
     constructor(){
       this.db = pool;
       this.bycrypt = bcrypt;
       this.querys = querys.record;
     }
 
-    hola(req, res){
-      console.log("llego aqui")
-      return "hola";
-    }
-  
-
-    
-    async getRecords  (req, res) {
-        console.log(req.userId)
-        const result = await this.db.query(record.getRecords);
-        //console.log(result);
+    //Obtener todos los registros / Get all records
+    async getRecords  (id_doctor) {
+        //const {id_pacient} = params
+        const result = await this.db.query(this.querys.getRecords, [id_doctor]);
         return result.rows;
       };
       
       //Obtener un registro / Get a record
       async getRecord (req, res) {
         const result = await pool.query(
-          record.getRecord,
+          querys.getRecord,
           [req.params.id]
         );
         console.log(result);
@@ -46,8 +34,16 @@ let Record = class {
       };
       
       //Crear un registro / Create a record
-      async createRecord  (params) {
-        const { id_paciente, desc_historia, id_doctor } = params;
+      async createRecord  (data) {
+        const [params, id_doctor] = data;
+        const { id_paciente, desc_historia} = params;
+
+        if (id_paciente === "" || desc_historia === "") {
+          return {
+            menssage: "The data is incomplete",
+            code: 404,
+          }
+        }
       
         try {
           const result = await pool.query(

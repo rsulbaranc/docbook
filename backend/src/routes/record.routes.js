@@ -21,6 +21,6 @@ router.put("/record/:id", isAuth, updateRecord);
 router.delete("/record/:id", isAuth, deleteRecord);
 
 
-router.post("/process", process)
+router.post("/process", isAuth, process)
 
 export default router;
