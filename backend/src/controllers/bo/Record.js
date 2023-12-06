@@ -17,6 +17,30 @@ let Record = class {
         const result = await this.db.query(this.querys.getRecords, [id_doctor]);
         return result.rows;
       };
+
+      //Obtener todos los registros de un paciente / Get all records of a patient
+    async getPatientRecords  (params) {
+      console.log(params)
+
+      /*
+      if (typeof params[0].id_paciente === 'number') {
+        console.log('no es numero')
+        return {
+          menssage: "The id is not a number",
+          code: 404,
+        }
+      } */
+     
+      try {
+        const result = await this.db.query(this.querys.getRecords, [params[0].id_paciente]);
+        console.log(result.rows)
+        return result.rows;
+      } catch (error) {
+        console.log(error)
+        return error;
+      }
+      
+    };
       
       //Obtener un registro / Get a record
       async getRecord (req, res) {

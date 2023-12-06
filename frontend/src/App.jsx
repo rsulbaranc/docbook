@@ -12,11 +12,16 @@ import NotFound from "./pages/NotFound";
 import DashboardDoctor from "./pages/DashboardDoctor";
 import { useAuth } from "./context/AuthContext";
 import { ProtectedRoute} from "./components/guards/ProtectedRoute";
+import { PatientGuard } from "./components/guards/PatientGuard";
 import { DoctorGuard } from "./components/guards/DoctorGuard";
+import  RegisterPatient  from "./pages/RegisterPatient"
 import RecordForm from "./pages/RecordForm";
 
 export const App = () => {
-  const { isAuth } = useAuth();
+  const { isAuth, user } = useAuth();
+  console.log(isAuth);
+
+  const license = user ? user.profile : null;
 
   return (
     <>
@@ -29,17 +34,26 @@ export const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
-
-          <Route element={<ProtectedRoute isAllowed={isAuth} redirecTo={"/login"}/>}>
-            <Route path="/" element={<Home />} />
+ 
+          {/* rutas comunes para usuarios autenticados */}
+          <Route element={<ProtectedRoute isAllowed={isAuth} redirecTo={"/login"} />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
 
+          <Route element={<PatientGuard isAllowed={isAuth} license={license}/>}>
+            <Route path="/" element={<Home />} />
 
-          <Route element={<DoctorGuard isAllowed={isAuth} redirecTo={"/"} license={"patient"}/>}>
+            
+          </Route>
+
+          <Route element={<DoctorGuard isAllowed={isAuth} license={license}/>}>
             <Route path="/dashboard" element={<DashboardDoctor/>}/>
             <Route path="/createRecord" element={<RecordForm />} />
+            <Route path="/registerPatient" element={<RegisterPatient />} />
           </Route>
+
+
+          
 
 
           <Route path="*" element={<NotFound />} />

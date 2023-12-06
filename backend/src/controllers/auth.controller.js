@@ -40,14 +40,16 @@ export const signin = async (req, res) => {
 export const signup = async (req, res, next) => {
   const { name, email, password, confirm_password } = req.body;
 
-  const hashPasword = await bcrypt.hash(password, 10)
+  
 
+  const hashPasword = await bcrypt.hash(password, 10)
+  const profile = 'patient'
   console.log(hashPasword)
 
     try {
-    const result = await pool.query(auth.register, [name, email, hashPasword]);
+    const result = await pool.query(auth.register, [name, email, hashPasword, profile]);
 
-    const token = await createAccessToken({ id: result.rows[0].id });
+    const token = await createAccessToken({ id: result.rows[0].id, profile: result.rows[0].profile });
 
     res.cookie('token', token, { 
         //httpOnly: true, 
@@ -75,4 +77,13 @@ export const signout = (req, res) => {
 export const profile = async (req, res) => {
   const result = await pool.query('SELECT * FROM usuario WHERE id = $1', [req.userId]);
   return res.json(result.rows[0]);
+};
+
+
+export const user = async (req, res) => {
+  console.log(req.body)
+  const result = await pool.query('SELECT * FROM usuario WHERE id = $1', [req.body.id]);
+  console.log(result.rows[0])
+  const {id, name} = result.rows[0]
+  return res.json({id: id, name: name});
 };

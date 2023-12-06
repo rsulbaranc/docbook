@@ -16,3 +16,5 @@ export const createRecordRequest = (data) => axios.post("/process", jsonData(dat
 export const getRecordsRequest = () => axios.post("/process", jsonDataWithOutParams('getRecords'));
 
 export const deleteRecordRequest = (id) => axios.post(`/process`, jsonData(id, 'deleteRecord'));
+
+export const getPatientRecordsRequest = (id) => axios.post(`/process`, jsonData(id, 'getPatientRecords'));

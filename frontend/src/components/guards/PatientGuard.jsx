@@ -1,9 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export const DoctorGuard = ({redirecTo, children, isAllowed, license}) => {
+export const PatientGuard = ({children, isAllowed, license}) => {
 
   
-    if(!isAllowed || license !== 'doctor') return <Navigate to={redirecTo} replace/>
+    if(!isAllowed) return <Navigate to="/login" replace/>
+    if(license !== "patient") return <Navigate to="/dashboard" replace/>
     
       return children ? children : <Outlet/>;
 }

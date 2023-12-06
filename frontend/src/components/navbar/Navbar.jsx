@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { publicRoutes, privateRoutes } from "./navigation";
+import { publicRoutes, patientRoutes, doctorRoutes } from "./navigation";
 import { Container } from "../ui";
 import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const location = useLocation();
-  const { isAuth, signout } = useAuth();
+  const { isAuth, signout, user } = useAuth();
   //console.log(location)
 
   return (
@@ -16,43 +16,43 @@ const Navbar = () => {
         </Link>
 
         <ul className="flex gap-x-2">
-          {isAuth ? (
+        {isAuth ? (
             <>
-              {privateRoutes.map((item) => (
+                {(user.profile === 'patient' ? patientRoutes : user.profile === 'doctor' ? doctorRoutes : publicRoutes).map((item) => (
+                    <li
+                        className={` ${
+                            location.pathname === item.href && "bg-sky-500 px-3 py-1 "
+                        } `}
+                        key={item.name}
+                    >
+                        <Link to={item.href} className="text-white">
+                            {item.name}
+                        </Link>
+                    </li>
+                ))}
                 <li
-                  className={` ${
-                    location.pathname === item.href && "bg-sky-500 px-3 py-1 "
-                  } `}
-                  key={item.name}
+                    onClick={() => {
+                        signout();
+                    }}
+                    className="text-white cursor-pointer"
                 >
-                  <Link to={item.href} className="text-white	">
-                    {item.name}
-                  </Link>
+                    Signout
                 </li>
-              ))}
-              <li
-                onClick={() => {
-                  signout();
-                }}
-                className="text-white cursor-pointer"
-              >
-                Signout
-              </li>
             </>
-          ) : (
+        ) : (
             publicRoutes.map((item) => (
-              <li
-                className={` ${
-                  location.pathname === item.href && "bg-sky-500 px-3 py-1 "
-                } `}
-                key={item.name}
-              >
-                <Link to={item.href} className="text-white	">
-                  {item.name}
-                </Link>
-              </li>
+                <li
+                    className={` ${
+                        location.pathname === item.href && "bg-sky-500 px-3 py-1 "
+                    } `}
+                    key={item.name}
+                >
+                    <Link to={item.href} className="text-white">
+                        {item.name}
+                    </Link>
+                </li>
             ))
-          )}
+        )}
         </ul>
       </Container>
     </nav>
