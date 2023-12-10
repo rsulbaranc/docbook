@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form"
 import { getUserRequest } from "../api/user";
 import { getPatientRecordsRequest } from "../api/records";
 import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const DashboardDoctor = () => {
 
   const { register, handleSubmit } = useForm()
+
+  const {user} = useAuth();
 
   const [patient, setPatient] = useState(null)
   const [records, setRecords] = useState([]);
@@ -14,6 +17,7 @@ const DashboardDoctor = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     setPatient(null)
+    setRecords([])
     console.log(data);
     const res = await getUserRequest(data)
     console.log(res);
@@ -21,17 +25,21 @@ const DashboardDoctor = () => {
 })
 
 useEffect(() => {
+  const fetchPatientRecords = async () => {
+    if (patient != null) {
+      const res = await getPatientRecordsRequest(patient.id);
+      console.log(res);
+      setRecords(res.data);
+    }
+  };
 
-  if (patient!= null) {
-    
-    const res = getPatientRecordsRequest(patient.id)
-  }
-
-
+  fetchPatientRecords();
 }, [patient]);
-
   return (
     <div>
+
+      <h1 className="text-3xl font-bold my-2 mb-4 text-center">Welcome doctor {user.name}!</h1>
+
       <Card>
         <form onSubmit={onSubmit} className="flex gap-10 items-center">
           <Label>ID paciente: </Label>
@@ -58,11 +66,11 @@ useEffect(() => {
         
         records.map((record) => (
         <Card key={record.id_historia} className="px-7 py-4" >
-          <h1>{record.id_historia}</h1>
-          <p>{record.desc_historia}</p>
-          <div className="my-2 flex justify-end gap-x-2">
+          <h1>ID HISTORIA: {record.id_historia}</h1>
+          <p>DESCRIPCION DE LA HISTORIA: {record.desc_historia}</p>
+          {/* <div className="my-2 flex justify-end gap-x-2">
             <Button>Editar</Button>
-          </div>
+          </div> */}
         </Card>
       ))
       

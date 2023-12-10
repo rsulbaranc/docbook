@@ -82,7 +82,7 @@ export const profile = async (req, res) => {
 
 export const user = async (req, res) => {
   console.log(req.body)
-  const result = await pool.query('SELECT * FROM usuario WHERE id = $1', [req.body.id]);
+  const result = await pool.query('SELECT * FROM usuario WHERE id = $1', [req.body.id_paciente]);
   console.log(result.rows[0])
   const {id, name} = result.rows[0]
   return res.json({id: id, name: name});

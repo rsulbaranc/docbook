@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div className="grid grid-cols-2 gap-2">
-      {records.map((record) => (
+      {records.length > 0 ? (records.map((record) => (
         <Card key={record.id_historia} className="px-7 py-4">
           <h1>{record.id_historia}</h1>
           <p>{record.desc_historia}</p>
@@ -39,7 +39,7 @@ const Home = () => {
             >Eliminar</Button>
           </div>
         </Card>
-      ))}
+      ))) : (<h1>Aun no tiene ninguna historia registrada</h1>)}
     </div>
   );
 };

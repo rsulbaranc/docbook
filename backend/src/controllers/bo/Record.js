@@ -20,19 +20,18 @@ let Record = class {
 
       //Obtener todos los registros de un paciente / Get all records of a patient
     async getPatientRecords  (params) {
-      console.log(params)
+      console.log(params[0])
 
-      /*
-      if (typeof params[0].id_paciente === 'number') {
+      if (params[0].id_doctor) {
         console.log('no es numero')
         return {
           menssage: "The id is not a number",
           code: 404,
         }
-      } */
+      }
      
       try {
-        const result = await this.db.query(this.querys.getRecords, [params[0].id_paciente]);
+        const result = await this.db.query(this.querys.getRecords, [params[0]]);
         console.log(result.rows)
         return result.rows;
       } catch (error) {
