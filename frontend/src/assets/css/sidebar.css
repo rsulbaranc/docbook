@@ -1,0 +1,107 @@
+.contain { 
+    background-color: #fff;
+    position: sticky;
+    height: 100vh;
+}
+
+.logoContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 24px;
+    padding-top: 20px;
+}
+
+.name.active {
+    display: block;
+}
+
+.name {
+    display: none;
+}
+
+.imgContent {
+    display: flex;
+    cursor: pointer;
+    transition: all 0.5s;
+    scale: 0.7;
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.imgContent.active {
+    transition: all 0.5s;
+    scale: 0.5;
+}
+
+.sidebar-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 15%;
+    right: -18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 4px rgb(230,230,230);
+    border: none;
+    letter-spacing: inherit;
+    font-size: inherit;
+    text-align: inherit;
+    color: inherit;
+    padding: 0;
+    font-family: inherit;
+    outline: none;
+}
+
+.sidebar-btn.active {
+    rotate: 180deg;
+}
+
+.routesContainer{
+    margin: 8px 0;
+    padding: 0 15%;
+
+}
+
+.routesContainer:hover{
+   background: rgb(230,230,230);
+    
+}
+
+.routes{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: calc(8px - 2px) 0;
+    .routesIcon {
+        padding: 8px 16px;
+        display: flex;
+        color: #202020;
+        svg{
+            font-size: 25px;  
+            color: #202020;
+        }
+    }
+}
+
+.routes.active{
+    color: #202020;
+    .routesIcon{
+        color: #202020;
+        svg{
+            color: #9247FC;
+        }
+    }
+}
+
+.divider{
+    height: 1px;
+    width: 100%;
+    background: rgb(230,230,230);
+    margin: 24px 0;
+}

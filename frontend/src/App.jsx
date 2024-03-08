@@ -1,8 +1,7 @@
 //import React from 'react'}
 
-import Navbar from "./components/navbar/Navbar";
-import { Container } from "./components/ui";
-
+//import Navbar from "./components/navbar/Navbar";
+//import { Container } from "./components/ui";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import { Profile } from "./pages/Profile";
@@ -16,6 +15,7 @@ import { PatientGuard } from "./components/guards/PatientGuard";
 import { DoctorGuard } from "./components/guards/DoctorGuard";
 import  RegisterPatient  from "./pages/RegisterPatient"
 import RecordForm from "./pages/RecordForm";
+import { LayoutSidebar } from "./components/navbar/Layout-sidebar";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
@@ -25,9 +25,6 @@ export const App = () => {
 
   return (
     <>
-      <Navbar />
-
-      <Container className="py-5">
         <Routes>
 
           <Route element={<ProtectedRoute isAllowed={!isAuth} redirecTo={"/"} />}>
@@ -37,19 +34,19 @@ export const App = () => {
  
           {/* rutas comunes para usuarios autenticados */}
           <Route element={<ProtectedRoute isAllowed={isAuth} redirecTo={"/login"} />}>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<LayoutSidebar><Profile/></LayoutSidebar>} />
           </Route>
 
           <Route element={<PatientGuard isAllowed={isAuth} license={license}/>}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<LayoutSidebar><Home /></LayoutSidebar>} />
 
             
           </Route>
 
           <Route element={<DoctorGuard isAllowed={isAuth} license={license}/>}>
-            <Route path="/dashboard" element={<DashboardDoctor/>}/>
-            <Route path="/createRecord" element={<RecordForm />} />
-            <Route path="/registerPatient" element={<RegisterPatient />} />
+            <Route path="/dashboard" element={<LayoutSidebar><DashboardDoctor/></LayoutSidebar>}/>
+            <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
+            <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
           </Route>
 
 
@@ -59,7 +56,6 @@ export const App = () => {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
-      </Container>
     </>
   );
 };
