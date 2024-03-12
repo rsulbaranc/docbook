@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Sidebar } from './Sidebar'
 import '../../assets/css/layout-sidebar.css'
 import { Container } from '../ui'
+import { Outlet } from 'react-router-dom'
 
 export const LayoutSidebar = ({children}) => {
 
@@ -19,6 +20,7 @@ export const LayoutSidebar = ({children}) => {
     <section>
     <Container className="py-5">
       {children}
+      <Outlet />
     </Container>
     </section>
   </div>

@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import Security from "./controllers/bo/Security.js";
 
 import recordRoutes from "./routes/record.routes.js";
 import authRoutes from "./routes/auth.routes.js";
@@ -22,6 +23,10 @@ app.get("/", (req, res) => { res.json({ message: "Welcome to docbook api" }); })
 
 app.use("/api", recordRoutes);
 app.use("/api", authRoutes);
+
+//Create admin
+const security = new Security();
+security.init();
 
 //error handler
 app.use((err, req, res, next) => {

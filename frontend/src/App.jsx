@@ -16,6 +16,9 @@ import { DoctorGuard } from "./components/guards/DoctorGuard";
 import  RegisterPatient  from "./pages/RegisterPatient"
 import RecordForm from "./pages/RecordForm";
 import { LayoutSidebar } from "./components/navbar/Layout-sidebar";
+import { MantenimientoUsuario } from "./pages/admin/MantenimientoUsuario";
+import { MantenimientoPerfil } from "./pages/admin/MantenimientoPerfil";
+import { MantenimientoEspecialidades } from "./pages/admin/MantenimientoEspecialidades";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
@@ -27,12 +30,12 @@ export const App = () => {
     <>
         <Routes>
 
-          <Route element={<ProtectedRoute isAllowed={!isAuth} redirecTo={"/"} />}>
+          {/* <Route element={<ProtectedRoute isAllowed={!isAuth} redirecTo={"/"} />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
  
-          {/* rutas comunes para usuarios autenticados */}
+          /* rutas comunes para usuarios autenticados  /
           <Route element={<ProtectedRoute isAllowed={isAuth} redirecTo={"/login"} />}>
             <Route path="/profile" element={<LayoutSidebar><Profile/></LayoutSidebar>} />
           </Route>
@@ -47,11 +50,27 @@ export const App = () => {
             <Route path="/dashboard" element={<LayoutSidebar><DashboardDoctor/></LayoutSidebar>}/>
             <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
             <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
-          </Route>
+          </Route> */}
+      
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            
+            <Route path="/profile" element={<LayoutSidebar><Profile/></LayoutSidebar>} />
+            <Route path="/" element={<LayoutSidebar><Home /></LayoutSidebar>} />
+            <Route path="/dashboard" element={<LayoutSidebar><DashboardDoctor/></LayoutSidebar>}/>
+            <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
+            <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
 
+            <Route path="/mantenimiento" element={<LayoutSidebar/>}>
+              <Route index element={<MantenimientoUsuario/>} />
+              <Route path="usuario" element={<MantenimientoUsuario/>} />
+              <Route path="perfil" element={<MantenimientoPerfil/>} />
+              {/* <Route path="procesos" element={<h1>Procesos</h1>} /> */}
+              <Route path="especialidades" element={<MantenimientoEspecialidades/>} />
+              {/* <Route path="permisos" element={<h1>Permisos</h1>} /> */}
+            </Route>
 
-          
-
+            <Route path="/prueba" element={<LayoutSidebar> <MantenimientoUsuario/></LayoutSidebar>}/>
 
           <Route path="*" element={<NotFound />} />
 
