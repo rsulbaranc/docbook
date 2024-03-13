@@ -1,0 +1,13 @@
+.sidebarState{
+    display: grid;
+    grid-template-columns: 90px auto;
+    background-color: #EDF3FB;
+    transition: all 0.3s;
+    height: 100vh;
+}
+
+
+.sidebarState.active{
+    grid-template-columns: 300px auto;
+    transition: all 0.3s;
+}
