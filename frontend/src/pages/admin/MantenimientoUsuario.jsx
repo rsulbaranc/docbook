@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Button, Card } from '../../components/ui'
+import { Button, Card, Input, Label, Textarea } from '../../components/ui'
 import { deleteUser, getAllUsers, getUser  } from '../../api/admin'
 import { FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa";
+import { Modal } from '../../components/ui/Modal';
+import { useForm } from 'react-hook-form';
 
 export const MantenimientoUsuario = () => {
 
@@ -39,6 +41,8 @@ export const MantenimientoUsuario = () => {
     
   }
 
+  const { register, handleSubmit } = useForm()
+
   return (
     <div>
       <Card>
@@ -49,10 +53,33 @@ export const MantenimientoUsuario = () => {
               <input type="text" placeholder="Buscar Usuario" className="w-80 p-2 my-2" onChange={(e) => setSearchContent(e.target.value)}/>
               <button className="bg-blue-500 text-white p-2" onClick={() => searchUser(searchContent)}>Buscar</button>
             </div>
-            <Button className="flex h-10">
+            <Modal 
+            btnText={ 
+            <div className='flex items-center justify-center gap-1'>
               <FaUserPlus />
               Agregar Usuario
-            </Button>
+            </div>}
+            btnClose={true}
+            >
+              <div>
+              <h2 className="text-3xl font-bold my-4">
+                Create Record
+            </h2>
+            <form >
+                <Label htmlFor="name">ID paciente</Label>
+                <Input type = "text" placeholder = "Enter ID paciente" 
+                {...register("id_paciente")}
+                />
+                
+                <Label htmlFor="Description">Description</Label>
+                <Textarea placeholder="Description" rows={3}
+                {...register("desc_historia")}
+                ></Textarea>
+
+                <Button>Create</Button>
+            </form>
+              </div>
+            </Modal>
           </div>
           <table className="w-full mt-3">
             <thead>

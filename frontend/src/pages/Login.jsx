@@ -3,6 +3,7 @@ import { Card, Input, Button, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
 //import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { Modal } from "../components/ui/Modal";
 
 const Login = () => {
 
