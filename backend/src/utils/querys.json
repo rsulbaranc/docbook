@@ -11,7 +11,10 @@
         "register": "INSERT INTO usuario ( name, email, password, profile) VALUES ($1, $2, $3, $4) RETURNING *"
     },
     "security": {
-        "checkAdminExists": "SELECT COUNT(*) FROM usuario WHERE profile = 'admin'",
+        "checkAdminExists": "SELECT COUNT(*) FROM security.user usr WHERE usr.user_na = 'administrador'",
+        "createAdminProfile": "INSERT INTO security.profile (profile_na) VALUES ('admin') RETURNING profile_id",
+        "createAdminUser": "INSERT INTO security.user (user_na, user_pass_va) VALUES ($1, $2) RETURNING user_id",
+        "createProfileUser": "INSERT INTO security.profile_user (profile_id, user_id) VALUES ($1, $2)",
         "getAllUsers": "SELECT * FROM usuario",
         "getUser": "SELECT * FROM usuario WHERE id = $1",
         "deleteUser": "DELETE FROM usuario WHERE id = $1"
