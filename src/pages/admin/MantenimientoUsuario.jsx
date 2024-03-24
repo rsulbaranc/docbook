@@ -21,6 +21,7 @@ export const MantenimientoUsuario = () => {
   const getUsers = async () => {
     await getAllUsers().then((res) => {
       setUsuarios(res.data);
+      console.log(res.data);
     });
   }
 
@@ -92,10 +93,10 @@ export const MantenimientoUsuario = () => {
             </thead>
             <tbody>
               {usuarios.length > 0 ? usuarios.map((usuario) => (
-                <tr key={usuario.id}>
-                  <td >{usuario.name}</td>
-                  <td >{usuario.email}</td>
-                  <td >{usuario.profile !== null ? usuario.profile : 'N/A'}</td>
+                <tr key={usuario.user_id}>
+                  <td >{usuario.user_na}</td>
+                  <td >{usuario.user_na}</td>
+                  <td >{usuario.profile_na !== null ? usuario.profile_na : 'N/A'}</td>
                   <td className='py-2 flex justify-around'>
                     <Button className='flex'>
                       <MdOutlineModeEdit />
