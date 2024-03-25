@@ -14,6 +14,7 @@ export const MantenimientoPerfil = () => {
     const [profiles, setProfiles] = useState([])
     const [profileForEdit, setProfileForEdit] = useState({})
     const [modalEdit, setModalEdit] = useState(false)
+    const [modalAdd, setModalAdd] = useState(false)
 
     const { register, handleSubmit, setValue } = useForm()
 
@@ -62,28 +63,26 @@ export const MantenimientoPerfil = () => {
             <h1 className='text-xl text-center font-bold'>Mantenimiento de Perfil</h1>
             <div>
                 <div className='flex justify-end'>
-                <Modal 
-                    btnText={ 
+                <Button onClick={() => setModalAdd(true)}>
                     <div className='flex items-center justify-center gap-1'>
                       <FaUserPlus />
                       Agregar Tipo de Perfil
-                    </div>}
-                    btnClose={true}
-                    zIndex="z-10"
-                    >
-              <div>
-              <h2 className="text-3xl font-bold my-4">
-                Crear Perfil
-            </h2>
-            <form onSubmit={createSubmit}>
-                <Label htmlFor="name">Nuevo perfil</Label>
-                <Input type = "text" placeholder = "escriba el nuevo perfil" className="w-full p-2 my-2"
-                {...register("profile_na")}
-                />
-                <Button>Crear</Button>
-            </form>
+                    </div>
+                </Button>
+                <Modal btnClose={true} setCloseStatus={setModalAdd} openModal={modalAdd}>
+                <div>
+                    <h2 className="text-3xl font-bold my-4">
+                    Crear Perfil
+                    </h2>
+                <form onSubmit={createSubmit}>
+                    <Label htmlFor="name">Nuevo perfil</Label>
+                    <Input type = "text" placeholder = "escriba el nuevo perfil" className="w-full p-2 my-2"
+                    {...register("profile_na")}
+                    />
+                    <Button>Crear</Button>
+                </form>
               </div>
-            </Modal>
+                </Modal>
                 </div>
                 <table className="w-full mt-3">
                     <thead>

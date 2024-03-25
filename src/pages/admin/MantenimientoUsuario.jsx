@@ -6,6 +6,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa";
 import { Modal } from '../../components/ui/Modal';
 import { useForm } from 'react-hook-form';
+import { Spinner } from '../../components/ui/Spinner';
 
 export const MantenimientoUsuario = () => {
 
@@ -17,23 +18,29 @@ export const MantenimientoUsuario = () => {
   [])
 
   const [searchContent, setSearchContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const getUsers = async () => {
+    setIsLoading(true);
     await getAllUsers().then((res) => {
       setUsuarios(res.data);
+      setIsLoading(false);
       console.log(res.data);
     });
   }
 
   const searchUser = async (searchContent) => {
     console.log(searchContent);
+    setIsLoading(true)
     await getUser({id: searchContent}).then((res) => {
       console.log(res.data);
       setUsuarios(res.data);
+      setIsLoading(false);
     });
   } 
 
   const deleteUserById = async (id) => {
+    setIsLoading(true);
     await deleteUser({id: id}).then((res) => {
       console.log(res.data);
 
@@ -112,6 +119,7 @@ export const MantenimientoUsuario = () => {
           </table>
         </div>
       </Card>
+      <Spinner isActive={isLoading} />
     </div>
   )
 }
