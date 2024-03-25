@@ -3,6 +3,7 @@ import { Card, Input, Button, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
 //import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { Modal } from "../components/ui/Modal";
 
 const Login = () => {
 
@@ -39,8 +40,8 @@ const Login = () => {
         <h1 className="text-4xl font-bold my-2 text-center">Sign in</h1>
 
         <form onSubmit={onSubmit}>
-          <Label htmlFor="email">Email</Label>
-          <Input type="email" placeholder="Enter your email" 
+          <Label htmlFor="text">Email</Label>
+          <Input type="text" placeholder="Enter your email" 
           {...register("username")}
           />
 

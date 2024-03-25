@@ -21,6 +21,7 @@ export function AuthProvider({ children }) {
   const signin = async(data) => {
     try{
     const res = await axios.post("/signin", data);
+    console.log(res);
     setUser(res.data);
     setIsAuth(true);
     return res.data;
@@ -60,7 +61,7 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    if (Cookie.get('token')){
+    if (Cookie.get('token')){ console.log("entra");
       axios
       .get("/profile")
       .then((res) => {
