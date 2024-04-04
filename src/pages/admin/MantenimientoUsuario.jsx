@@ -7,6 +7,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { Modal } from '../../components/ui/Modal';
 import { useForm } from 'react-hook-form';
 import { Spinner } from '../../components/ui/Spinner';
+import { toast } from 'react-toastify';
 
 export const MantenimientoUsuario = () => {
 
@@ -18,6 +19,8 @@ export const MantenimientoUsuario = () => {
   [])
 
   const [searchContent, setSearchContent] = useState('');
+  const [modalUser, setModalUser] = useState(false);
+  const [userEdit, setUserEdit] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const getUsers = async () => {
@@ -61,7 +64,15 @@ export const MantenimientoUsuario = () => {
               <input type="text" placeholder="Buscar Usuario" className="w-80 p-2 my-2" onChange={(e) => setSearchContent(e.target.value)}/>
               <button className="bg-blue-500 text-white p-2" onClick={() => searchUser(searchContent)}>Buscar</button>
             </div>
-            <Modal 
+            <div className='flex justify-end gap-1 items-center'>
+            <Button onClick={() => setModalUser(true)}>
+              <div className='flex items-center justify-center gap-1'>
+                <FaUserPlus />
+                Agregar usuario
+              </div>
+            </Button>
+            </div>
+            {/* <Modal 
             btnText={ 
             <div className='flex items-center justify-center gap-1'>
               <FaUserPlus />
@@ -87,7 +98,7 @@ export const MantenimientoUsuario = () => {
                 <Button>Create</Button>
             </form>
               </div>
-            </Modal>
+            </Modal> */}
           </div>
           <table className="w-full mt-3">
             <thead>
@@ -105,7 +116,7 @@ export const MantenimientoUsuario = () => {
                   <td >{usuario.user_na}</td>
                   <td >{usuario.profile_na !== null ? usuario.profile_na : 'N/A'}</td>
                   <td className='py-2 flex justify-around'>
-                    <Button className='flex'>
+                    <Button className='flex' onClick={() => {toast("Wow so easy!")} }>
                       <MdOutlineModeEdit />
                       Editar
                     </Button>
@@ -120,6 +131,47 @@ export const MantenimientoUsuario = () => {
         </div>
       </Card>
       <Spinner isActive={isLoading} />
+
+      <Modal openModal={modalUser} btnClose={true} setCloseStatus={setModalUser}>
+      <div className='p-8'>
+        <h2 className="text-3xl font-bold my-2 text-center">
+          Agregar usuario
+        </h2>
+
+        <form className='mt-8' onSubmit={() => toast("Wow so easy!")}>
+
+        <div className='flex flex-col gap-4'>
+
+          <div>
+            <Label htmlFor="name">Nombre de usuario</Label>
+            <Input type = "text" placeholder = "Nombre de usuario" {...register("user_na")}/>
+          </div>
+          
+          <div>
+            <Label htmlFor="name">Cedula de la persona</Label>
+            <Input type = "text" placeholder = "Cedula de la persona" {...register("user_ci")}/>
+          </div>
+          
+          <div>
+            <Label htmlFor="name">Contraseña</Label>
+            <Input type = "text" placeholder = "Contraseña" {...register("user_pass")}/>
+          </div>
+         
+          <div>
+            <Label htmlFor="name">Confirmar contraseña</Label>
+            <Input type = "email" placeholder = "Confirmar contraseña" {...register("confirm_user_pass")}/>
+          </div>
+          
+          <div className='mt-2 col-span-2 flex justify-center items-center'>
+              <Button>Guardar</Button>
+          </div>
+        
+        </div>
+
+        </form>
+
+      </div>
+      </Modal>
     </div>
   )
 }

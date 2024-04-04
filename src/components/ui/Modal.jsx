@@ -6,7 +6,7 @@ import { set } from 'react-hook-form';
 
 
 
-export const Modal = ({btnText, btnClose, children, openModal, zIndex, setCloseStatus}) => {
+export const Modal = ({btnText, btnClose, children, openModal, zIndex, setCloseStatus, size, resetValue}) => {
 
     const [showModal, setShowModal] = useState(false);
 
@@ -23,12 +23,13 @@ export const Modal = ({btnText, btnClose, children, openModal, zIndex, setCloseS
         ) : null}
         {showModal ? (
             <div className='fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex justify-center items-center' >
-                <div className='bg-white rounded p-5 flex flex-col justify-center items-center gap-5 relative'> 
+                <div className={`bg-white rounded p-5 flex flex-col justify-center items-center gap-5 relative ${size} overflow-auto`}> 
                     {btnClose ? (
                         <div className="absolute top-0 right-0 m-2 text-indigo-600 cursor-pointer"> 
                         <IoCloseCircleOutline size={32} onClick={() => {
                             setShowModal(false);
                             if(setCloseStatus) setCloseStatus(false);
+                            if(resetValue) resetValue("");
                         } }/>
                     </div>
                 ): null }

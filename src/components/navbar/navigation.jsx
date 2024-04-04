@@ -4,6 +4,8 @@ import { FaNotesMedical } from "react-icons/fa";
 import { FaUserDoctor, FaGears  } from "react-icons/fa6";
 import { ImProfile } from "react-icons/im";
 import { MdOutlineSecurity } from "react-icons/md";
+import { FaPerson } from "react-icons/fa6";
+
 
 const publicRoutes = [
   { label: "Login", path: "/login", current: false },
@@ -24,11 +26,12 @@ const doctorRoutes = [
 
 const adminRoutes = [
   { label: "Home", path: "/dashboard", current: false , icon: <AiOutlineHome/>},
+  { label: "Persona", path: "/mantenimiento/persona", current: false, icon: <FaPerson />},
   { label: "Usuario", path: "/mantenimiento/usuario", current: false, icon: <CgProfile /> },
   { label: "Perfil", path: "/mantenimiento/perfil", current: false, icon: <ImProfile />},
-  //{ label: "Procesos", path: "/mantenimiento/procesos", current: false, icon: <FaGears />},
-  { label: "Especialidades", path: "/mantenimiento/especialidades", current: false, icon: <FaUserDoctor />},
-  //{ label: "Permisos", path: "/mantenimiento/permisos", current: false, icon: <MdOutlineSecurity />},
+  { label: "Procesos", path: "/mantenimiento/procesos", current: false, icon: <FaGears />},
+  { label: "Permisos", path: "/mantenimiento/permisos", current: false, icon: <MdOutlineSecurity />},
+
 ]
 
 export const useRoutesInfo = (userProfile) => {

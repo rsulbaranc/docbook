@@ -19,6 +19,9 @@ import { LayoutSidebar } from "./components/navbar/Layout-sidebar";
 import { MantenimientoUsuario } from "./pages/admin/MantenimientoUsuario";
 import { MantenimientoPerfil } from "./pages/admin/MantenimientoPerfil";
 import { MantenimientoEspecialidades } from "./pages/admin/MantenimientoEspecialidades";
+import { MantenimientoPersona } from "./pages/admin/MantenimientoPersona";
+import { MantenimientoProceso } from "./pages/admin/MantenimientoProceso";
+import { MantenimientoPermiso } from "./pages/admin/MantenimientoPermiso";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
@@ -64,10 +67,11 @@ export const App = () => {
             <Route path="/mantenimiento" element={<LayoutSidebar/>}>
               <Route index element={<MantenimientoUsuario/>} />
               <Route path="usuario" element={<MantenimientoUsuario/>} />
+              <Route path="persona" element={<MantenimientoPersona/>} />
               <Route path="perfil" element={<MantenimientoPerfil/>} />
-              {/* <Route path="procesos" element={<h1>Procesos</h1>} /> */}
+              <Route path="procesos" element={<MantenimientoProceso/>} /> 
               <Route path="especialidades" element={<MantenimientoEspecialidades/>} />
-              {/* <Route path="permisos" element={<h1>Permisos</h1>} /> */}
+              <Route path="permisos" element={<MantenimientoPermiso/>} />
             </Route>
 
             <Route path="/prueba" element={<LayoutSidebar> <MantenimientoUsuario/></LayoutSidebar>}/>

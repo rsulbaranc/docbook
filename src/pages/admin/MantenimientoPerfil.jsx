@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Input, Label, Textarea } from '../../components/ui'
+import { Button, Card, Input, Label, Textarea, Spinner } from '../../components/ui'
 import { Modal } from '../../components/ui/Modal'
 import { FaUserPlus } from 'react-icons/fa'
 import { get, useForm } from 'react-hook-form'
@@ -15,6 +15,7 @@ export const MantenimientoPerfil = () => {
     const [profileForEdit, setProfileForEdit] = useState({})
     const [modalEdit, setModalEdit] = useState(false)
     const [modalAdd, setModalAdd] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const { register, handleSubmit, setValue } = useForm()
 
@@ -124,6 +125,7 @@ export const MantenimientoPerfil = () => {
                 </form>
             </div>
         </Modal>
+        <Spinner isActive={isLoading} />
     </div>
   )
 }
