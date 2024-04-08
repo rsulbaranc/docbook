@@ -42,3 +42,11 @@ export const updatePerson = (data) => axios.post("/process", jsonData(data, 'upd
 export const createUser = (data) => axios.post("/process", jsonData(data, 'createUser'));
 
 export const updateUser = (data) => axios.post("/process", jsonData(data, 'updateUser'));
+
+export const createProcess = (data) => axios.post("/process", jsonData(data, 'createProcess'));
+
+export const getAllProcess = () => axios.post("/process", jsonDataWithOutParams('getAllProcess'));
+
+export const deleteProcess = (data) => axios.post("/process", jsonData(data, 'deleteProcess'));
+
+export const updateProcess = (data) => axios.post("/process", jsonData(data, 'updateProcess'));
