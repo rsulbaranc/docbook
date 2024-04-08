@@ -38,3 +38,7 @@ export const getAllPerson = () => axios.post("/process", jsonDataWithOutParams('
 export const deletePerson = (data) => axios.post("/process", jsonData(data, 'deletePerson'));
 
 export const updatePerson = (data) => axios.post("/process", jsonData(data, 'updatePerson'));
+
+export const createUser = (data) => axios.post("/process", jsonData(data, 'createUser'));
+
+export const updateUser = (data) => axios.post("/process", jsonData(data, 'updateUser'));
