@@ -25,13 +25,14 @@ export const MantenimientoProceso = () => {
       setIsLoading(false);
     }).catch((err) => {
       console.log(err);
+      setIsLoading(false);
     });
   }
 
 
   const addProcess = handleSubmit((data) => {
     setIsLoading(true);
-    if(!editProcess) {
+    if(!editProcess.process_id) {
       createProcess(data).then((res) => {
         console.log(res.data);
         const newProcesses = [...processes, res.data.data];

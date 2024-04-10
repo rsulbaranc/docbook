@@ -50,3 +50,9 @@ export const getAllProcess = () => axios.post("/process", jsonDataWithOutParams(
 export const deleteProcess = (data) => axios.post("/process", jsonData(data, 'deleteProcess'));
 
 export const updateProcess = (data) => axios.post("/process", jsonData(data, 'updateProcess'));
+
+export const createPermission = (data) => axios.post("/process", jsonData(data, 'createPermission'));
+
+export const getAllPermissions = () => axios.post("/process", jsonDataWithOutParams('getPermissions'));
+
+export const deletePermission = (data) => axios.post("/process", jsonData(data, 'deletePermission'));
