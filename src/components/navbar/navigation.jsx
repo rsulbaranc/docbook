@@ -39,7 +39,7 @@ export const useRoutesInfo = (userProfile) => {
   let routes;
 
   switch(userProfile) {
-    case 'patient':
+    case 'paciente':
       routes = patientRoutes;
       break;
     case 'doctor':

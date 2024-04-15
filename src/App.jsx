@@ -25,7 +25,7 @@ import { MantenimientoPermiso } from "./pages/admin/MantenimientoPermiso";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
-  console.log(isAuth);
+  //console.log(isAuth);
 
   const license = user ? user.profile : null;
 
