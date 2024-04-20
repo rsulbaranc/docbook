@@ -34,6 +34,12 @@ const adminRoutes = [
 
 ]
 
+const bioanalistRoutes = [
+  { label: "Home", path: "/", current: true, icon: <AiOutlineHome/>},
+  { label: "Profile", path: "/profile", current: false, icon: <CgProfile />},
+  { label: "Examen", path: "/examen/registrar", current: false, icon: <FaNotesMedical />},
+];
+
 export const useRoutesInfo = (userProfile) => {
 
   let routes;
@@ -47,6 +53,9 @@ export const useRoutesInfo = (userProfile) => {
       break;
     case 'admin':
       routes = adminRoutes;
+      break;
+    case 'bioanalista':
+      routes = bioanalistRoutes;
       break;
     default:
       routes = publicRoutes;

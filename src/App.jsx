@@ -22,6 +22,7 @@ import { MantenimientoEspecialidades } from "./pages/admin/MantenimientoEspecial
 import { MantenimientoPersona } from "./pages/admin/MantenimientoPersona";
 import { MantenimientoProceso } from "./pages/admin/MantenimientoProceso";
 import { MantenimientoPermiso } from "./pages/admin/MantenimientoPermiso";
+import { RegisterExam } from "./pages/exams/RegisterExam";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
@@ -64,6 +65,8 @@ export const App = () => {
             <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
             <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
 
+            
+
             <Route path="/mantenimiento" element={<LayoutSidebar/>}>
               <Route index element={<MantenimientoUsuario/>} />
               <Route path="usuario" element={<MantenimientoUsuario/>} />
@@ -72,6 +75,10 @@ export const App = () => {
               <Route path="procesos" element={<MantenimientoProceso/>} /> 
               <Route path="especialidades" element={<MantenimientoEspecialidades/>} />
               <Route path="permisos" element={<MantenimientoPermiso/>} />
+            </Route>
+
+            <Route path="/examen" element={<LayoutSidebar/>}>
+              <Route path="registrar" element={<RegisterExam/>} />
             </Route>
 
             <Route path="/prueba" element={<LayoutSidebar> <MantenimientoUsuario/></LayoutSidebar>}/>
