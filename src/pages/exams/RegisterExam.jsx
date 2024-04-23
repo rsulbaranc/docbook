@@ -11,20 +11,17 @@ const onSubmit = async (data) => {
 
   console.log(data);
 
-    formData.append("patient_ci", data.patient_ci);
-    formData.append("history_dg", data.history_dg);
-    formData.append("history_de", data.history_de);
-    formData.append("recipe_de", data.recipe_de);
-    //formData.append("file", data.file[0]);
+  const params =  {
+    patient_ci: data.patient_ci,
+    history_dg: data.history_dg,
+    history_de: data.history_de,
+    recipe_de: data.recipe_de
+  }
+    formData.append("file", data.file[0]);
+    formData.append("class", "Business");
+    formData.append("method", "registerExam");
+    formData.append("params", JSON.stringify(params));
 
-  /* Agrega los datos al objeto FormData
-  for (const key in data) {
-    if (key === "file") {
-      formData.append(key, data[key][0]);
-    } else {
-      formData.append(key, data[key]);
-    }
-  } */
 
   // Realiza la solicitud HTTP
   const response = await axios.post('/processFormData', formData, {
