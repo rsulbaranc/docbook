@@ -1,17 +1,17 @@
 import React from 'react'
 import axios from '../../api/axios'
-import { Button, Card, Input, Label, Textarea } from '../../components/ui'
+import { Button, Card, Input, Label, Spinner, Textarea } from '../../components/ui'
 import { useForm } from 'react-hook-form'
 import { toast } from "react-toastify";
 
 export const RegisterExam = () => {
   const { register, handleSubmit } = useForm()
 
+  const [isLoading, setIsLoading] = React.useState(false)
+
 const onSubmit = async (data) => {
   const formData = new FormData();
-
-  console.log(data);
-
+  
   const params =  {
     patient_ci: data.patient_ci,
     exam_na: data.exam_na,
@@ -22,15 +22,28 @@ const onSubmit = async (data) => {
     formData.append("method", "registerExam");
     formData.append("params", JSON.stringify(params));
 
+    const header = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
 
   // Realiza la solicitud HTTP
-  const response = await axios.post('/processFormData', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
+  setIsLoading(true);
+  await axios.post('/processFormData', formData, header).then((response) => {
+    console.log(response);
+    toast.success("Examen cargado con éxito");
+  }).catch((error) => {
 
-  console.log(response.data);
+    if (!error.response.data.errorMessage) {
+      toast.error("Error al cargar el examen");
+      return;
+    }
+    toast.error(error.response.data.errorMessage);
+  });
+  setIsLoading(false);
+
+
 }
 
   return (
@@ -63,11 +76,13 @@ const onSubmit = async (data) => {
         />
 
         <div className="flex justify-center items-center mt-4">
-          <Button type="submit">Enviar</Button>
+          <Button type="submit">Guardar</Button>
         </div>
 
         </form>
       </Card>
+
+      <Spinner  isActive={isLoading}/>
     </div>
   )
 }
