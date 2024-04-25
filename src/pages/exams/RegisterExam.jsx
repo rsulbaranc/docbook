@@ -2,6 +2,7 @@ import React from 'react'
 import axios from '../../api/axios'
 import { Button, Card, Input, Label, Textarea } from '../../components/ui'
 import { useForm } from 'react-hook-form'
+import { toast } from "react-toastify";
 
 export const RegisterExam = () => {
   const { register, handleSubmit } = useForm()
@@ -13,9 +14,8 @@ const onSubmit = async (data) => {
 
   const params =  {
     patient_ci: data.patient_ci,
-    history_dg: data.history_dg,
-    history_de: data.history_de,
-    recipe_de: data.recipe_de
+    exam_na: data.exam_na,
+    exam_de: data.exam_de
   }
     formData.append("file", data.file[0]);
     formData.append("class", "Business");
@@ -43,19 +43,29 @@ const onSubmit = async (data) => {
         <Label htmlFor="name">Cedula del paciente</Label>
         <Input type="text" placeholder="Cedula del paciente" {...register("patient_ci")} />
 
-        <Label htmlFor="name">Diagnostico</Label>
-        <Input type="text" placeholder="escriba el diagnóstico" {...register("history_dg")} />
+        <Label htmlFor="title">Titulo del examen</Label>
+        <Input type="text" placeholder="Titulo del examen" {...register("exam_na")} />
 
         <Label htmlFor="Description">Descripcion</Label>
-        <Textarea placeholder="Descripcion" rows={5} {...register("history_de")}></Textarea>
-
-        <Label htmlFor="Description">Recipe</Label>
-        <Textarea placeholder="Escriba el recipe" rows={3} {...register("recipe_de")}></Textarea>
+        <Textarea placeholder="Descripcion" rows={5} {...register("exam_de")}></Textarea>
 
         <Label htmlFor="file">Archivo</Label>
-        <Input type="file" {...register("file")} />
+        <Input 
+          type="file" 
+          {...register("file")} 
+          accept="application/pdf" 
+          onChange={(e) => {
+            if (e.target.files[0].size > (5 * 1024 * 1024)) { // 5MB in bytes
+              toast.info("Por favor, seleccione un archivo de menos de 5MB.")
+              e.target.value = ""; // reset the file input
+            }
+          }} 
+        />
 
-        <Button type="submit">Enviar</Button>
+        <div className="flex justify-center items-center mt-4">
+          <Button type="submit">Enviar</Button>
+        </div>
+
         </form>
       </Card>
     </div>
