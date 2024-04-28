@@ -1,6 +1,6 @@
 import { AiOutlineHome } from 'react-icons/ai';
 import { CgProfile } from "react-icons/cg";
-import { FaNotesMedical } from "react-icons/fa";
+import { FaMicroscope, FaNotesMedical, FaSearch } from "react-icons/fa";
 import { FaUserDoctor, FaGears  } from "react-icons/fa6";
 import { ImProfile } from "react-icons/im";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -36,8 +36,8 @@ const adminRoutes = [
 
 const bioanalistRoutes = [
   { label: "Home", path: "/", current: true, icon: <AiOutlineHome/>},
-  { label: "Profile", path: "/profile", current: false, icon: <CgProfile />},
-  { label: "Examen", path: "/examen/registrar", current: false, icon: <FaNotesMedical />},
+  { label: "Consultar examen", path: "/examen/consulta", current: false, icon: <FaMicroscope />},
+  { label: "Registrar examen", path: "/examen/registrar", current: false, icon: <FaNotesMedical />},
 ];
 
 export const useRoutesInfo = (userProfile) => {

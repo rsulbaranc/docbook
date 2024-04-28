@@ -23,6 +23,7 @@ import { MantenimientoPersona } from "./pages/admin/MantenimientoPersona";
 import { MantenimientoProceso } from "./pages/admin/MantenimientoProceso";
 import { MantenimientoPermiso } from "./pages/admin/MantenimientoPermiso";
 import { RegisterExam } from "./pages/exams/RegisterExam";
+import { Exams } from "./pages/exams/Exams";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
@@ -78,6 +79,7 @@ export const App = () => {
             </Route>
 
             <Route path="/examen" element={<LayoutSidebar/>}>
+              <Route path="consulta" element={<Exams />} />
               <Route path="registrar" element={<RegisterExam/>} />
             </Route>
 
