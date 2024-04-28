@@ -14,7 +14,8 @@ const publicRoutes = [
 
 const patientRoutes = [
   { label: "Home", path: "/", current: true, icon: <AiOutlineHome/>},
-  { label: "Profile", path: "/profile", current: false, icon: <CgProfile />}
+  { label: "Profile", path: "/profile", current: false, icon: <CgProfile />},
+  { label: "Exanenes", path: "/examen/paciente", current: false, icon: <FaMicroscope />}
 ];
 
 const doctorRoutes = [

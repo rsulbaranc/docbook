@@ -45,10 +45,14 @@ export const Exams = () => {
         const fetchPatientExam = async () => {
           if (patient != null) {
             setIsLoading(true);
-            const res = await getPatientExamns(patient.id);
-            if (res) setIsLoading(false);
-            console.log(res);
-            setRecords(res.data);
+            await getPatientExamns(patient.id).then((res) => {
+              console.log(res);
+              setRecords(res.data);
+            }).catch((err) => {
+                console.log(err);
+                
+            });
+            setIsLoading(false);
           }
         };
       
