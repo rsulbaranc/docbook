@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteRecordRequest, getPatientRecordsRequest, getRecipeRequest, getRecordsRequest } from "../api/records";
 import { Button, Card, Input, Label, Modal, Spinner, Textarea } from "../components/ui";
 import { toast } from "react-toastify";
+import { set } from "react-hook-form";
 
 const Home = () => {
 
@@ -22,6 +23,9 @@ const Home = () => {
     await getRecordsRequest().then((res) => {
       setRecords(res.data);
       console.log(res.data);
+    }).catch((err) => {
+      setRecords([]);
+      setIsLoading(false);
     });
 
     setIsLoading(false);

@@ -58,3 +58,5 @@ export const getAllPermissions = () => axios.post("/process", jsonDataWithOutPar
 export const deletePermission = (data) => axios.post("/process", jsonData(data, 'deletePermission'));
 
 export const createPersonPatient = (data) => axios.post("/process", jsonData(data, 'createPersonPatient'));
+
+export const getPermissionsByProfile = () => axios.post("/process", jsonDataWithOutParams('getPermissionsByProfile'));
