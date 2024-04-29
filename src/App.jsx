@@ -16,12 +16,11 @@ import { DoctorGuard } from "./components/guards/DoctorGuard";
 import  RegisterPatient  from "./pages/RegisterPatient"
 import RecordForm from "./pages/RecordForm";
 import { LayoutSidebar } from "./components/navbar/Layout-sidebar";
-import { MantenimientoUsuario } from "./pages/admin/MantenimientoUsuario";
-import { MantenimientoPerfil } from "./pages/admin/MantenimientoPerfil";
-import { MantenimientoEspecialidades } from "./pages/admin/MantenimientoEspecialidades";
-import { MantenimientoPersona } from "./pages/admin/MantenimientoPersona";
-import { MantenimientoProceso } from "./pages/admin/MantenimientoProceso";
-import { MantenimientoPermiso } from "./pages/admin/MantenimientoPermiso";
+import { MantenimientoUsuario } from "./pages/admin/UserMaintenance";
+import { MantenimientoPerfil } from "./pages/admin/ProfileMaintenance";
+import { MantenimientoPersona } from "./pages/admin/PersonMaintenance";
+import { MantenimientoProceso } from "./pages/admin/ProcessMaintenance";
+import { MantenimientoPermiso } from "./pages/admin/PermissionMaintenance";
 import { RegisterExam } from "./pages/exams/RegisterExam";
 import { Exams } from "./pages/exams/Exams";
 import { ExamsPatient } from "./pages/exams/ExamsPatient";
@@ -128,7 +127,6 @@ export const App = () => {
                 <Route path="persona" element={<MantenimientoPersona/>} />
                 <Route path="perfil" element={<MantenimientoPerfil/>} />
                 <Route path="procesos" element={<MantenimientoProceso/>} /> 
-                <Route path="especialidades" element={<MantenimientoEspecialidades/>} />
                 <Route path="permisos" element={<MantenimientoPermiso/>} />
               </Route>
             )}
