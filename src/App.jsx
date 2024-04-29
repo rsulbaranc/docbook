@@ -110,13 +110,13 @@ export const App = () => {
               <Route path="/" element={<LayoutSidebar><Home /></LayoutSidebar>} />
             )}
             
-            {userPermissions.includes('/dashboard') && (
+            {userPermissions.includes('dashboard') && (
               <Route path="/dashboard" element={<LayoutSidebar><DashboardDoctor/></LayoutSidebar>}/>
             )}
-            {userPermissions.includes('/createRecord') && (
+            {userPermissions.includes('registro historia') && (
               <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
             )}
-            {userPermissions.includes('/registerPatient') && (
+            {userPermissions.includes('registro paciente') && (
               <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
             )}
 

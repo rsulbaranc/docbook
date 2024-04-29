@@ -60,10 +60,15 @@ useEffect(() => {
   const fetchPatientRecords = async () => {
     if (patient != null) {
       setIsLoading(true);
-      const res = await getPatientRecordsRequest(patient.id);
-      if (res) setIsLoading(false);
-      console.log(res);
-      setRecords(res.data);
+      await getPatientRecordsRequest(patient.id).then((res) => {
+        console.log(res);
+        setRecords(res.data);
+        setIsLoading(false);
+      }).catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.message);
+        setIsLoading(false);
+      })
     }
   };
 
