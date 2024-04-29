@@ -98,13 +98,13 @@ export const MantenimientoPerfil = () => {
                             <tr key={profile.profile_id}>
                                 <td>{profile.profile_id}</td>
                                 <td>{profile.profile_na}</td>
-                                <td>
+                                <td className='py-2 flex justify-around'>
                                     <Button onClick={() => {
                                         setProfileForEdit(profile); 
                                         setModalEdit(true);
                                         setValue('profile_na', profile.profile_na);
                                     } }>Editar</Button>
-                                    <Button onClick={ () => deleteOneProfile(profile.profile_id) }>Eliminar</Button>
+                                    <Button onClick={ () => deleteOneProfile(profile.profile_id) } className='flex bg-red-600 hover:bg-red-400'>Eliminar</Button>
                                 </td>
 
                             </tr>
