@@ -4,3 +4,7 @@ export { default as Card } from "./Card";
 export { Label } from "./Label";
 export { Container } from "./Container";
 export { Textarea } from "./Textarea";
+export { Spinner } from "./Spinner";
+export { Modal } from "./Modal";
+export { Select } from "./Select";
+export { Datepicker } from "./Datepicker";

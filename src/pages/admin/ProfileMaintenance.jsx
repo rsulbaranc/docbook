@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Input, Label, Textarea } from '../../components/ui'
+import { Button, Card, Input, Label, Textarea, Spinner } from '../../components/ui'
 import { Modal } from '../../components/ui/Modal'
 import { FaUserPlus } from 'react-icons/fa'
 import { get, useForm } from 'react-hook-form'
@@ -14,6 +14,8 @@ export const MantenimientoPerfil = () => {
     const [profiles, setProfiles] = useState([])
     const [profileForEdit, setProfileForEdit] = useState({})
     const [modalEdit, setModalEdit] = useState(false)
+    const [modalAdd, setModalAdd] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const { register, handleSubmit, setValue } = useForm()
 
@@ -62,28 +64,26 @@ export const MantenimientoPerfil = () => {
             <h1 className='text-xl text-center font-bold'>Mantenimiento de Perfil</h1>
             <div>
                 <div className='flex justify-end'>
-                <Modal 
-                    btnText={ 
+                <Button onClick={() => setModalAdd(true)}>
                     <div className='flex items-center justify-center gap-1'>
                       <FaUserPlus />
                       Agregar Tipo de Perfil
-                    </div>}
-                    btnClose={true}
-                    zIndex="z-10"
-                    >
-              <div>
-              <h2 className="text-3xl font-bold my-4">
-                Crear Perfil
-            </h2>
-            <form onSubmit={createSubmit}>
-                <Label htmlFor="name">Nuevo perfil</Label>
-                <Input type = "text" placeholder = "escriba el nuevo perfil" className="w-full p-2 my-2"
-                {...register("profile_na")}
-                />
-                <Button>Crear</Button>
-            </form>
+                    </div>
+                </Button>
+                <Modal btnClose={true} setCloseStatus={setModalAdd} openModal={modalAdd}>
+                <div>
+                    <h2 className="text-3xl font-bold my-4">
+                    Crear Perfil
+                    </h2>
+                <form onSubmit={createSubmit}>
+                    <Label htmlFor="name">Nuevo perfil</Label>
+                    <Input type = "text" placeholder = "escriba el nuevo perfil" className="w-full p-2 my-2"
+                    {...register("profile_na")}
+                    />
+                    <Button>Crear</Button>
+                </form>
               </div>
-            </Modal>
+                </Modal>
                 </div>
                 <table className="w-full mt-3">
                     <thead>
@@ -98,13 +98,13 @@ export const MantenimientoPerfil = () => {
                             <tr key={profile.profile_id}>
                                 <td>{profile.profile_id}</td>
                                 <td>{profile.profile_na}</td>
-                                <td>
+                                <td className='py-2 flex justify-around'>
                                     <Button onClick={() => {
                                         setProfileForEdit(profile); 
                                         setModalEdit(true);
                                         setValue('profile_na', profile.profile_na);
                                     } }>Editar</Button>
-                                    <Button onClick={ () => deleteOneProfile(profile.profile_id) }>Eliminar</Button>
+                                    <Button onClick={ () => deleteOneProfile(profile.profile_id) } className='flex bg-red-600 hover:bg-red-400'>Eliminar</Button>
                                 </td>
 
                             </tr>
@@ -125,6 +125,7 @@ export const MantenimientoPerfil = () => {
                 </form>
             </div>
         </Modal>
+        <Spinner isActive={isLoading} />
     </div>
   )
 }

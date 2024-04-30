@@ -27,7 +27,7 @@ const Register = () => {
           )
         }
 
-        <h1 className="text-4xl font-bold my-2 text-center">Register</h1>
+        <h1 className="text-4xl font-bold my-2 text-center">Registro</h1>
 
         <form onSubmit={onSubmit}>
           <Label htmlFor="name">Name</Label>

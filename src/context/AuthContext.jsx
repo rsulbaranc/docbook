@@ -60,9 +60,13 @@ export function AuthProvider({ children }) {
     setIsAuth(false);
   };
 
-  useEffect(() => {
-    if (Cookie.get('token')){ console.log("entra");
-      axios
+useEffect(() => {
+  console.log('Checking user token');
+  const token = Cookie.get('token');
+  console.log('Token:', token);
+  if (token) {
+    console.log("entra");
+    axios
       .get("/profile")
       .then((res) => {
         setUser(res.data);
@@ -71,10 +75,10 @@ export function AuthProvider({ children }) {
       .catch((err) => {
         setUser(null);
         setIsAuth(false);
-        console.log(err);
+        console.log('Error:', err.response);
       })
-    }
-  }, []);
+  }
+}, []);
 
   return (
     <AuthContext.Provider value={{ user, isAuth, errors, signup, signin, signout}}>

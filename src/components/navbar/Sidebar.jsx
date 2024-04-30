@@ -1,5 +1,5 @@
 import "../../assets/css/sidebar.css"
-import logo from "../../assets/img/logo_alternativo_docbook.png"
+import logo from "../../assets/img/LogoDocBook.png"
 import { AiOutlineRight} from "react-icons/ai";
 import { NavLink } from 'react-router-dom'
 import { useRoutesInfo } from "./navigation";

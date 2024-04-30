@@ -37,26 +37,26 @@ const Login = () => {
           )
         }
 
-        <h1 className="text-4xl font-bold my-2 text-center">Sign in</h1>
+        <h1 className="text-4xl font-bold my-2 text-center">Iniciar sesion</h1>
 
         <form onSubmit={onSubmit}>
-          <Label htmlFor="text">Email</Label>
+          <Label htmlFor="text">Usuario</Label>
           <Input type="text" placeholder="Enter your email" 
           {...register("username")}
           />
 
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Contraseña</Label>
           <Input type="password" placeholder="Enter your password" 
           {...register("password")}
           />
 
-          <Button>Sign in</Button>
+          <Button>Iniciar sesion</Button>
         </form>
 
-        <div className="flex justify-between my-4">
-          <p>Don{"'"}t have an account? </p>
+        <div className="flex justify-between my-4 gap-1">
+          <p>Aún no tienes una cuenta? </p>
           <Link to="/register" className="font-bold">
-            Register
+            Registrate
           </Link>
         </div>
       </Card>

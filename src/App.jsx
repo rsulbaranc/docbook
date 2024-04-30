@@ -16,15 +16,57 @@ import { DoctorGuard } from "./components/guards/DoctorGuard";
 import  RegisterPatient  from "./pages/RegisterPatient"
 import RecordForm from "./pages/RecordForm";
 import { LayoutSidebar } from "./components/navbar/Layout-sidebar";
-import { MantenimientoUsuario } from "./pages/admin/MantenimientoUsuario";
-import { MantenimientoPerfil } from "./pages/admin/MantenimientoPerfil";
-import { MantenimientoEspecialidades } from "./pages/admin/MantenimientoEspecialidades";
+import { MantenimientoUsuario } from "./pages/admin/UserMaintenance";
+import { MantenimientoPerfil } from "./pages/admin/ProfileMaintenance";
+import { MantenimientoPersona } from "./pages/admin/PersonMaintenance";
+import { MantenimientoProceso } from "./pages/admin/ProcessMaintenance";
+import { MantenimientoPermiso } from "./pages/admin/PermissionMaintenance";
+import { RegisterExam } from "./pages/exams/RegisterExam";
+import { Exams } from "./pages/exams/Exams";
+import { ExamsPatient } from "./pages/exams/ExamsPatient";
+import { useEffect, useState } from "react";
+import { getPermissionsByProfile } from "./api/admin";
 
 export const App = () => {
   const { isAuth, user } = useAuth();
-  console.log(isAuth);
+  const [userPermissions, setUserPermissions] = useState([]);
+  //console.log(isAuth);
 
-  const license = user ? user.profile : null;
+
+  useEffect(() => {
+    console.log(user);
+    checkPermissions();
+  }, [user]);
+
+  const checkPermissions = async () => {
+    if (user) {
+
+      await getPermissionsByProfile().then((res) => {
+        console.log(res.data);
+        setUserPermissions(res.data);
+      }
+      ).catch((error) => {
+        console.log(error);
+      });
+    }
+    
+  }
+
+  const regidirectTo = (profile) => {
+    switch (profile) {
+      case 'admin':
+        return '/mantenimiento';
+      case 'doctor':
+        return '/dashboard';
+      case 'paciente':
+        return '/';
+      case 'bioanalista':
+        return '/examen';
+      default:
+        return '/';
+    }
+
+  }
 
   return (
     <>
@@ -52,25 +94,62 @@ export const App = () => {
             <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
           </Route> */}
       
+          <Route element={<ProtectedRoute isAllowed={!isAuth} redirecTo={"/"} />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+          </Route>
             
-            <Route path="/profile" element={<LayoutSidebar><Profile/></LayoutSidebar>} />
-            <Route path="/" element={<LayoutSidebar><Home /></LayoutSidebar>} />
-            <Route path="/dashboard" element={<LayoutSidebar><DashboardDoctor/></LayoutSidebar>}/>
-            <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
-            <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
 
-            <Route path="/mantenimiento" element={<LayoutSidebar/>}>
-              <Route index element={<MantenimientoUsuario/>} />
-              <Route path="usuario" element={<MantenimientoUsuario/>} />
-              <Route path="perfil" element={<MantenimientoPerfil/>} />
-              {/* <Route path="procesos" element={<h1>Procesos</h1>} /> */}
-              <Route path="especialidades" element={<MantenimientoEspecialidades/>} />
-              {/* <Route path="permisos" element={<h1>Permisos</h1>} /> */}
+            {userPermissions.includes('perfil') && (
+              <Route path="/profile" element={<LayoutSidebar><Profile/></LayoutSidebar>} />
+            )}
+
+            {/* Solo permitir el acceso a la ruta "/" si el usuario tiene el permiso correspondiente */}
+            {userPermissions.includes('Home') && (
+              <Route path="/" element={<LayoutSidebar><Home /></LayoutSidebar>} />
+            )}
+            
+            {userPermissions.includes('dashboard') && (
+              <Route path="/dashboard" element={<LayoutSidebar><DashboardDoctor/></LayoutSidebar>}/>
+            )}
+            {userPermissions.includes('registro historia') && (
+              <Route path="/createRecord" element={<LayoutSidebar><RecordForm /></LayoutSidebar>} />
+            )}
+            {userPermissions.includes('registro paciente') && (
+              <Route path="/registerPatient" element={<LayoutSidebar><RegisterPatient /></LayoutSidebar>} />
+            )}
+
+
+            {user && user.profile === 'admin' && (
+              <Route path="/mantenimiento" element={<LayoutSidebar/>}>
+                <Route index element={<MantenimientoUsuario/>} />
+                <Route path="usuario" element={<MantenimientoUsuario/>} />
+                <Route path="persona" element={<MantenimientoPersona/>} />
+                <Route path="perfil" element={<MantenimientoPerfil/>} />
+                <Route path="procesos" element={<MantenimientoProceso/>} /> 
+                <Route path="permisos" element={<MantenimientoPermiso/>} />
+              </Route>
+            )}
+
+            
+
+            {userPermissions.includes('Examenes') && (
+            <Route path="/examen" element={<LayoutSidebar/>}>
+              {userPermissions.includes('Examen consulta') && (
+                <Route index element={<Exams />} />
+              )}
+              {userPermissions.includes('Examen consulta') && (
+                <Route path="consulta" element={<Exams />} />
+              )}
+
+              {userPermissions.includes('Examen registro') && (
+                <Route path="registrar" element={<RegisterExam/>} />
+              )}
+\             {userPermissions.includes('Examen paciente') && (
+                <Route path="paciente" element={<ExamsPatient />} />
+              )}
             </Route>
-
-            <Route path="/prueba" element={<LayoutSidebar> <MantenimientoUsuario/></LayoutSidebar>}/>
+            )}
 
           <Route path="*" element={<NotFound />} />
 
