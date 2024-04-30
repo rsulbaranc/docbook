@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Input, Label, Textarea, Spinner } from '../../components/ui'
 import { Modal } from '../../components/ui/Modal'
 import { FaUserPlus } from 'react-icons/fa'
-import { get, useForm } from 'react-hook-form'
+import { get, set, useForm } from 'react-hook-form'
 import { createProfile, deleteProfile, getAllProfiles, updateProfile } from '../../api/admin'
 
 export const MantenimientoPerfil = () => {
@@ -20,10 +20,15 @@ export const MantenimientoPerfil = () => {
     const { register, handleSubmit, setValue } = useForm()
 
     const getProfiles = async () => {
+        setIsLoading(true)
         await getAllProfiles().then((res) => {
             console.log(res.data);
             setProfiles(res.data);
-        });
+            setIsLoading(false);
+        }).catch((err) => {
+            console.log(err);
+            setIsLoading(false);
+        })
     }
 
     const createSubmit = handleSubmit(async (data) => {

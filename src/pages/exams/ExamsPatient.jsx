@@ -53,7 +53,7 @@ export const ExamsPatient = () => {
         {exams.length > 0 ?  (
       
       exams.map((exam) => (
-      <Card key={exam.exam_id} className="px-7 py-4" >
+      <Card key={exam.exam_id} className="px-7 py-4 mb-4" >
         <h2 className="text-xl font-bold">{exam.exam_na}</h2>
         <p>Por el doctor: {exam.doctor_na} {exam.doctor_la} el {formatDate(exam.exam_da)}</p>
         <div className="my-2 flex justify-end gap-x-2">

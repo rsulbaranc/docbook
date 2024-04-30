@@ -144,7 +144,7 @@ export const MantenimientoUsuario = () => {
         <h1 className='text-xl text-center font-bold'>Matenimiento de Usuarios</h1>
         <div>
           <div className='flex justify-between' >
-            <div>
+            <div className='invisible'>
               <input type="text" placeholder="Buscar Usuario" className="w-80 p-2 my-2" onChange={(e) => setSearchContent(e.target.value)}/>
               <button className="bg-blue-500 text-white p-2" onClick={() => searchUser(searchContent)}>Buscar</button>
             </div>

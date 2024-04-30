@@ -60,11 +60,11 @@ const Home = () => {
 
   return (
     <div className="">
-      <h1 className="text-3xl bold">Historias clinicas</h1>
+      <h1 className="text-3xl font-bold my-2 mb-4 text-center">Historias clinicas</h1>
       {records.length > 0 ?  (
         
         records.map((record) => (
-        <Card key={record.history_id} className="px-7 py-4" >
+        <Card key={record.history_id} className="px-7 py-4 mb-4" >
           <h2 className="text-xl font-bold">Diagnostico: {record.history_dg}</h2>
           <p>Por el doctor: {record.doctor_na} {record.doctor_la} el {formatDate(record.history_da)}</p>
           <div className="my-2 flex justify-end gap-x-2">

@@ -13,20 +13,20 @@ const publicRoutes = [
 ];
 
 const patientRoutes = [
-  { label: "Home", path: "/", current: true, icon: <AiOutlineHome/>},
-  { label: "Profile", path: "/profile", current: false, icon: <CgProfile />},
-  { label: "Exanenes", path: "/examen/paciente", current: false, icon: <FaMicroscope />}
+  { label: "Inicio", path: "/", current: true, icon: <AiOutlineHome/>},
+  { label: "Exanenes", path: "/examen/paciente", current: false, icon: <FaMicroscope />},
+  { label: "Perfil", path: "/profile", current: false, icon: <CgProfile />},
 ];
 
 const doctorRoutes = [
-  { label: "Home", path: "/dashboard", current: false , icon: <AiOutlineHome/>},
-  { label: "Profile", path: "/profile", current: false, icon: <CgProfile /> },
-  { label: "Create Record", path: "/createRecord", current: false, icon: <FaNotesMedical />},
-  { label: "Register Patient", path: "/registerPatient", current: false, icon: <FaUserDoctor />},
+  { label: "Inicio", path: "/dashboard", current: false , icon: <AiOutlineHome/>},
+  { label: "Consultar examen", path: "/examen/consulta", current: false, icon: <FaMicroscope />},
+  { label: "Registrar historia", path: "/createRecord", current: false, icon: <FaNotesMedical />},
+  { label: "Registrar paciente", path: "/registerPatient", current: false, icon: <FaUserDoctor />},
+  { label: "Perfil", path: "/profile", current: false, icon: <CgProfile /> },
 ]
 
 const adminRoutes = [
-  { label: "Home", path: "/dashboard", current: false , icon: <AiOutlineHome/>},
   { label: "Persona", path: "/mantenimiento/persona", current: false, icon: <FaPerson />},
   { label: "Usuario", path: "/mantenimiento/usuario", current: false, icon: <CgProfile /> },
   { label: "Perfil", path: "/mantenimiento/perfil", current: false, icon: <ImProfile />},
@@ -36,7 +36,6 @@ const adminRoutes = [
 ]
 
 const bioanalistRoutes = [
-  { label: "Home", path: "/", current: true, icon: <AiOutlineHome/>},
   { label: "Consultar examen", path: "/examen/consulta", current: false, icon: <FaMicroscope />},
   { label: "Registrar examen", path: "/examen/registrar", current: false, icon: <FaNotesMedical />},
 ];

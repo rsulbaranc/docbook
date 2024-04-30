@@ -22,6 +22,10 @@ if (!user) {
   return null; 
 }
 
+const logout = async () => {
+  await signout();
+}
+
   return (
     <div className='contain'>
       <button onClick={openSidebar} className={sidebarOpened ? 'sidebar-btn active' : 'sidebar-btn'}>
@@ -50,7 +54,7 @@ if (!user) {
       </div>
       <div className="routesContainer">
         <div className='divider'></div>
-          <div className="routes" style={{cursor: "pointer"}} onClick={signout}>
+          <div className="routes" style={{cursor: "pointer"}} onClick={ () => {logout()}}>
             <div className="routesIcon">
               <FaSignOutAlt />
             </div>

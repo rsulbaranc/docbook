@@ -2,6 +2,10 @@ import axios from "../api/axios";
 import { createContext, useState, useContext } from "react";
 import { useEffect } from "react";
 import Cookie from "js-cookie";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+
 
 export const AuthContext = createContext();
 
@@ -54,10 +58,17 @@ export function AuthProvider({ children }) {
     
   }
 
+  const navigate = useNavigate();
+
   const signout = async() => {
+    
+
     await axios.post("/signout");
     setUser(null);
     setIsAuth(false);
+    Cookie.remove('token');
+
+    navigate('/login');
   };
 
 useEffect(() => {

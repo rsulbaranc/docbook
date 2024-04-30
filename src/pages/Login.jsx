@@ -15,7 +15,25 @@ const Login = () => {
   const onSubmit = handleSubmit(async (data) => {
     
     const user = await signin(data);
-    if (user) navigate('/profile');
+    console.log(user)
+    if (user){
+      switch (user.profile) {
+        case 'admin':
+          navigate('/mantenimiento');
+          break;
+        case 'doctor':
+          navigate('/dashboard');
+          break;
+        case 'patient':
+          navigate('/profile');
+          break;
+        case 'bioanalista':
+          navigate('/examen');
+          break;
+        default:
+          break;
+      }
+    };
 
     /*
     console.log(data);

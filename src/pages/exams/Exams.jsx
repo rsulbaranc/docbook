@@ -98,7 +98,7 @@ export const Exams = () => {
     <Card>
       <form onSubmit={onSubmit} className="flex gap-10 items-center">
         <Label>Cedula del paciente</Label>
-        <Input type="text" name="id_paciente" className="w-6/12"
+        <Input type="text" name="id_paciente" className="w-6/12" style={{width: "50%"}}
         {...register("patient_ci")}/>
         <Button>Buscar</Button>
       </form>
@@ -120,7 +120,7 @@ export const Exams = () => {
     {records.length > 0 ?  (
       
       records.map((record) => (
-      <Card key={record.exam_id} className="px-7 py-4" >
+      <Card key={record.exam_id} className="px-7 py-4 mb-4" >
         <h2 className="text-xl font-bold">{record.exam_na}</h2>
         <p>Por el doctor: {record.doctor_na} {record.doctor_la} el {formatDate(record.exam_da)}</p>
         <div className="my-2 flex justify-end gap-x-2">
